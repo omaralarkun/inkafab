@@ -1,0 +1,103 @@
+# AVANCE DEL PROYECTO — TIENDA 3D INKAFAB
+
+> Archivo de progreso generado en la sesión actual de opencode para poder reanudar contexto futuro.
+
+## Qué es
+Aplicación web **estática** (HTML + CSS + JS + JSON/CSV) de venta de impresión 3D:
+- Catálogo de modelos.
+- Analizador **STL/OBJ/3MF**: volumen → peso → precio, vista previa 3D (canvas propio).
+- Carrito persistente (localStorage) con **+ / − / Eliminar**.
+- **Pedido mínimo S/.50** con barra de progreso y checkout bloqueado.
+- **IGV 18%** calculado internamente (no se muestra al cliente).
+- Envíos **Serpost/Olva** + delivery Juliaca + recojo.
+- Checkout por **WhatsApp**.
+- Panel admin (CRUD + exportar/importar JSON/CSV + ventas locales ofuscadas).
+
+## Convención de versiones (sin git)
+- Snapshots en `_versiones/`: `app.NNN.js`, `index.NNN.html`, `styles.NNN.css`, `admin.NNN.*`, `README.NNN.md`.
+- Datos en `_versiones/data.NNN/`.
+- Último snapshot visible: `.005`. (La revisión de los botones del carrito fue `.006` en algunos archivos — verificar.)
+
+## Estructura
+```
+demo3d/
+├── index.html
+├── app.js
+├── styles.css
+├── admin.html / admin.js / admin.css
+├── README.md
+├── avance.txt          <- este archivo
+├── data/
+│   ├── config.json
+│   ├── productos.json
+│   ├── materiales.json
+│   └── envio.csv
+└── assets/ + _versiones/
+```
+
+## data/config.json (claves importantes)
+- `envioJuliaca: 15`
+- `precioPorGramoBase: 0.20`
+- `manoDeObraMinima: 5`
+- `velocidadImpresionCm3Hora: 8`
+- `factorMaterialInfill: { "0.15":0.30, "0.30":0.42, "0.50":0.58, "1.0":1.00 }`
+- `potenciaImpresoraKW: 0.15`
+- `precioKWh: 0.70`
+- `costoMaquinaHora: 2.00`
+- `minutosPreparacion: 5`
+- `tarifaManoObraMinuto: 0.20`
+- `margen: 0.40`
+- `precioMinimo: 5`
+- `igv: 0.18`
+- `pedidoMinimo: 50`         <- configurable, no hardcodeado
+- `garantia.reglas` (peso → meses)
+
+## Motor de precio (calculateQuote en app.js)
+```
+factor = materialFactor(infill)               // 15→0.30, 30→0.42, 50→0.58, 100→1.00
+pesoEstimado = volumenCm3 * densidad * factor
+tiempoHoras  = (volumenMaterial) / velocidad
+costoMaterial    = pesoG * precioG
+costoElectricidad= potenciaKW * tiempoH * precioKWh * qty
+costoMaquina     = tiempoH * costoMaquinaHora * qty
+costoManoObra    = max(manoObraMinima, minutosPrep * tarifaManoObraMin)
+costoBase        = suma de costos
+precioUnitFinal (con IGV) = totalConIgv / qty
+totalConIgv      = costoBase*(1+margen) * (1+igv)  [y precio mínimo]
+```
+- El IGV y el margen se calculan internamente; la UI solo muestra **Precio unidad** (ya con IGV), Cantidad y **TOTAL**.
+
+## Cambios clave aplicados
+- `config.json`: añadidos `pedidoMinimo`, `igv`, y demás parámetros; corregido mojibake.
+- `app.js`:
+  - `saveCart()` / `loadCart()` (persistencia en `inkafab_cart`).
+  - `calculateQuote` con factor de material, electricidad, máquina, mano de obra, margen, IGV y precio mínimo.
+  - Cotización simplificada (sin Peso/Tiempo/Subtotal/IGV/Margen/Costos).
+  - Pedido mínimo: barra de progreso (`#minOrderBlock`), sugerencias (`#minSuggestions`), `submitOrder.disabled`.
+  - Checkout valida mínimo (doble barrera UI + función).
+  - Botones `+ / − / Eliminar` con delegación de eventos sobre `#cartItems`.
+  - Mensaje WhatsApp sin peso/subtotal (solo envío + costo total).
+- `styles.css`: estilos de `.qty-btn`, `.progress-fill`, `#minOrderBlock`, etc.
+- `index.html`: carrito con envío/total + bloques de mínimo; assets con `?v=` para evitar caché.
+- `admin.js`: login contra config ofuscado, exportar/importar catálogo y materiales JSON, ventas en localStorage ofuscado.
+
+## Estado actual (verificado)
+- `node --check app.js` y `admin.js` → OK.
+- `config.json`, `materiales.json`, `productos.json` válidos.
+- Carrito persiste al recargar.
+- Botones +/− funcionan tanto al agregar desde el analizador STL como desde las sugerencias.
+- Pedido mínimo: bloquea <50, habilita >=50, barra al 100% sin desbordar.
+
+## Cómo retomar
+1. `cd C:\demo3d`
+2. `node --check app.js; node --check admin.js`
+3. Prueba motor: `calculateQuote(plá, 2.51, 0.15, 1)` → esperado aprox. S/.8.89 unit / totalConIgv.
+4. Probar carrito: agregar custom + sugerencia, cambiar qty, recargar para ver persistencia.
+5. Probar mínimo: S/49.99 bloqueado, S/50.00 habilitado.
+6. Revisar `index.html` (`?v=`) para evitar caché en navegador.
+
+## Notas / pendientes
+- No hay git: usar snapshots `_versiones`.
+- La vista previa 3D es canvas propio (no requiere three.js aunque se carga por CDN).
+- Las ventas solo se guardan en el navegador local; el registro oficial es WhatsApp.
+- Posibles siguientes pasos: probar en navegador real el flujo completo, verificar caché, revisar el mensaje WhatsApp final.

@@ -1,0 +1,27 @@
+{
+  "marca": "INKAFAB",
+  "whatsapp": "=MgAFQBcw9Hdy9Hf",
+  "adminPassword": "=YgACEBIgACIgACI",
+  "moneda": "S/.",
+  "envioJuliaca": 15,
+  "precioPorGramoBase": 0.20,
+  "manoDeObraMinima": 5,
+  "velocidadImpresionCm3Hora": 8,
+  "factorMaterialInfill": { "0.15": 0.30, "0.30": 0.42, "0.50": 0.58, "1.0": 1.00 },
+  "potenciaImpresoraKW": 0.15,
+  "precioKWh": 0.70,
+  "costoMaquinaHora": 2.00,
+  "minutosPreparacion": 5,
+  "tarifaManoObraMinuto": 0.20,
+  "margen": 0.40,
+  "precioMinimo": 5.00,
+  "igv": 0.18,
+  "pedidoMinimo": 50.00,
+  "garantia": {
+    "reglas": [
+      { "maxPesoG": 50, "meses": 1, "label": "Piezas pequeñas de alta definición" },
+      { "maxPesoG": 500, "meses": 6, "label": "Piezas medianas" },
+      { "maxPesoG": 1000000, "meses": 12, "label": "Piezas grandes o mecánicas funcionales" }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+[
+  { "id": "pla", "nombre": "PLA", "icono": "🌱", "descripcion": "Económico y ecológico", "densidad_gcc": 1.24, "precio_g": 0.20 },
+  { "id": "petg", "nombre": "PETG", "icono": "💧", "descripcion": "Resistente y duradero", "densidad_gcc": 1.27, "precio_g": 0.35 },
+  { "id": "abs", "nombre": "ABS", "icono": "🛡️", "descripcion": "Alta resistencia térmica", "densidad_gcc": 1.04, "precio_g": 0.30 },
+  { "id": "tpu", "nombre": "TPU", "icono": "🔧", "descripcion": "Flexible y maleable", "densidad_gcc": 1.21, "precio_g": 0.30 },
+  { "id": "resina", "nombre": "Resina", "icono": "✨", "descripcion": "Alto nivel de detalle", "densidad_gcc": 1.20, "precio_g": 0.50 }
+]

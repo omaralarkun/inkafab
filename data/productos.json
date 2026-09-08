@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "name": "Figura Articulada Dragonite",
+    "type": "decorativo",
+    "category": "figuras",
+    "desc": "Figura coleccionable de alta precisión, ideal para detalles finos y pintado.",
+    "material": "resina",
+    "price": 45,
+    "oldPrice": 60,
+    "stock": 12,
+    "peso": 0.18,
+    "resolucion": 0.05,
+    "image": "assets/img/ejemplos/dragonite.svg",
+    "features": [
+      "Resina",
+      "Alta detalle",
+      "Pintable"
+    ],
+    "dims": "8 x 12 x 20 cm",
+    "time": "4-6h"
+  },
+  {
+    "id": 2,
+    "name": "Organizador de Escritorio Modular",
+    "type": "organizacion",
+    "category": "organizacion",
+    "desc": "Organizador modular con compartimentos para lápiz, celular y notas.",
+    "material": "pla",
+    "price": 85,
+    "oldPrice": 95,
+    "stock": 8,
+    "peso": 0.42,
+    "resolucion": 0.2,
+    "image": "assets/img/ejemplos/organizador.svg",
+    "features": [
+      "PLA",
+      "Modular",
+      "Lava links"
+    ],
+    "dims": "20 x 10 x 15 cm",
+    "time": "6-8h"
+  },
+  {
+    "id": 3,
+    "name": "Engranaje Mecánico",
+    "type": "mecanico",
+    "category": "mecanico",
+    "desc": "Pieza mecánica de precisión, para prototipos y reparaciones.",
+    "material": "abs",
+    "price": 12,
+    "stock": 20,
+    "peso": 0.06,
+    "resolucion": 0.1,
+    "image": "assets/img/ejemplos/engranaje.svg",
+    "features": [
+      "ABS",
+      "Precisión",
+      "Prototipo"
+    ],
+    "dims": "5 x 5 x 2 cm",
+    "time": "1-2h"
+  },
+  {
+    "id": 4,
+    "name": "Maceta Suculenta",
+    "type": "decorativo",
+    "category": "decorativo",
+    "desc": "Maceta con drenaje integrado, perfecta para decoración hogareña.",
+    "material": "pla",
+    "price": 28,
+    "stock": 15,
+    "peso": 0.2,
+    "resolucion": 0.2,
+    "image": "assets/img/ejemplos/maceta.svg",
+    "features": [
+      "PLA",
+      "Color",
+      "Sostenible"
+    ],
+    "dims": "12 x 12 x 10 cm",
+    "time": "3-4h"
+  },
+  {
+    "id": 5,
+    "name": "Clip de Escritorio Peques",
+    "type": "funcional",
+    "category": "funcional",
+    "desc": "Clip de escritorio que decora y funciona a la vez.",
+    "material": "petg",
+    "price": 45,
+    "stock": 10,
+    "peso": 0.03,
+    "resolucion": 0.1,
+    "image": "assets/img/ejemplos/clip.svg",
+    "features": [
+      "PETG",
+      "Funcional",
+      "Gadget"
+    ],
+    "dims": "3 x 3 x 3 cm",
+    "time": "1h"
+  },
+  {
+    "id": 6,
+    "name": "Robot Educativo",
+    "type": "mecanico",
+    "category": "mecanico",
+    "desc": "Kit educativo de robot, ideal para enseñar robótica.",
+    "material": "tpu",
+    "price": 150,
+    "stock": 5,
+    "peso": 0.8,
+    "resolucion": 0.2,
+    "image": "assets/img/ejemplos/robot.svg",
+    "features": [
+      "TPU",
+      "Educativo",
+      "STEM"
+    ],
+    "dims": "20 x 25 x 12 cm",
+    "time": "10-14h"
+  },
+  {
+    "id": 7,
+    "name": "Engranaje Decorativo",
+    "type": "decorativo",
+    "category": "decorativo",
+    "desc": "Pieza decorativa industrial con movimiento.",
+    "material": "pla",
+    "price": 35,
+    "stock": 14,
+    "peso": 0.15,
+    "resolucion": 0.2,
+    "image": "assets/img/ejemplos/engranaje-deco.svg",
+    "features": [
+      "PLA",
+      "Decorativo",
+      "Mecanismo"
+    ],
+    "dims": "15 x 4 cm",
+    "time": "2-3h"
+  },
+  {
+    "id": 8,
+    "name": "Banner Personalizado",
+    "type": "funcional",
+    "category": "personalizado",
+    "desc": "Imprime tu logo, nombre o diseño personalizado a medida.",
+    "material": "resina",
+    "price": 300,
+    "stock": 3,
+    "peso": 1.2,
+    "resolucion": 0.05,
+    "image": "assets/img/ejemplos/banner.svg",
+    "features": [
+      "Resina",
+      "Personalizado",
+      "Logo"
+    ],
+    "dims": "30 x 30 cm",
+    "time": "12h"
+  }
+  
+]

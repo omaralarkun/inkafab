@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKAFAB - Impresión 3D Profesional en Perú</title>
+    <meta name="description" content="INKAFAB: impresión 3D profesional en Perú. Catálogo de modelos, impresión personalizada STL, cotización al instante y entrega por Serpost u Olva.">
+    <meta property="og:title" content="INKAFAB - Impresión 3D Profesional">
+    <meta property="og:description" content="Impresión 3D profesional. Cotiza tu modelo STL al instante, precio por material y envío por Serpost u Olva.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="assets/img/logo/favicon.svg">
+    <link rel="stylesheet" href="styles.css?v=006">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8v-4-4l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                <span>INKAFAB</span>
+            </a>
+            <nav class="nav">
+                <a href="#catalogo" class="nav-link">Catálogo</a>
+                <a href="#materiales" class="nav-link">Materiales</a>
+                <a href="#personalizado" class="nav-link">Personalizado</a>
+                <a href="#garantia" class="nav-link">Garantía</a>
+                <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+            </nav>
+            <button class="cart-toggle" id="cartToggle" aria-label="Carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Impresión 3D <span class="accent">Profesional</span></h1>
+                    <p>Convierte tus ideas en realidad. Calidad industrial, materiales premium y entrega en todo Perú por Serpost u Olva.</p>
+                    <div class="hero-actions">
+                        <a href="#catalogo" class="btn btn-primary">Explorar Catálogo</a>
+                        <a href="#personalizado" class="btn btn-secondary">Pedido Personalizado</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Modelos disponibles</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Materiales</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">24-72h</span>
+                            <span class="stat-label">Entrega express</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="materiales" class="materials">
+            <div class="container">
+                <h2 class="section-title">Materiales Disponibles</h2>
+                <div class="materials-grid" id="materialsGrid"></div>
+            </div>
+        </section>
+
+        <section id="catalogo" class="catalog">
+            <div class="container">
+                <header class="catalog-header">
+                    <h2 class="section-title">Catálogo de Modelos</h2>
+                    <div class="catalog-controls">
+                        <div class="search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <input type="text" id="searchInput" placeholder="Buscar modelos...">
+                        </div>
+                        <div class="filters" id="filters">
+                            <button class="filter-btn active" data-filter="all">Todos</button>
+                            <button class="filter-btn" data-filter="funcional">Funcionales</button>
+                            <button class="filter-btn" data-filter="decorativo">Decorativos</button>
+                            <button class="filter-btn" data-filter="mecanico">Mecánicos</button>
+                            <button class="filter-btn" data-filter="organizacion">Organización</button>
+                        </div>
+                    </div>
+                </header>
+                <div class="catalog-grid" id="catalogGrid"></div>
+                <div class="no-results" id="noResults" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
+                    </svg>
+                    <p>No se encontraron modelos con esos filtros</p>
+                    <button class="btn btn-secondary" id="resetFilters">Restablecer filtros</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="personalizado" class="custom-order">
+            <div class="container">
+                <div class="custom-content">
+                    <h2 class="section-title">¿Tienes tu propio diseño?</h2>
+                    <p>Sube tu archivo STL y te cotizamos al instante. Calculamos volumen, material y precio automáticamente.</p>
+                    <div class="custom-form">
+                        <div class="file-upload" id="fileUpload">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                            <p>Arrastra tu archivo <strong>.stl</strong> aquí o haz clic</p>
+                            <small>Máx. 50MB</small>
+                            <input type="file" id="fileInput" accept=".stl" hidden>
+                        </div>
+                        <div class="custom-options">
+                            <div class="option-group">
+                                <label>Material</label>
+                                <select id="customMaterial"></select>
+                            </div>
+                            <div class="option-group">
+                                <label>Color</label>
+                                <select id="customColor">
+                                    <option value="">Seleccionar color...</option>
+                                    <option value="negro">Negro</option>
+                                    <option value="blanco">Blanco</option>
+                                    <option value="gris">Gris</option>
+                                    <option value="azul">Azul</option>
+                                    <option value="rojo">Rojo</option>
+                                    <option value="verde">Verde</option>
+                                    <option value="amarillo">Amarillo</option>
+                                    <option value="naranja">Naranja</option>
+                                    <option value="transparente">Transparente</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Relleno (Infill)</label>
+                                <select id="customInfill">
+                                    <option value="0.15">15% - Ligero/Decorativo</option>
+                                    <option value="0.30">30% - Estándar</option>
+                                    <option value="0.50">50% - Resistente</option>
+                                    <option value="1.0">100% - Sólido/Máxima resistencia</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Unidad del archivo</label>
+                                <select id="stlUnit">
+                                    <option value="mm">Milímetros (mm)</option>
+                                    <option value="cm">Centímetros (cm)</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Cantidad</label>
+                                <input type="number" id="customQuantity" value="1" min="1" max="100">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-full" id="getQuote">Analizar y Cotizar</button>
+                        <div class="quote-result" id="quoteResult" style="display:none;"></div>
+                        <div id="stlPreviewWrap" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="garantia" class="garantia">
+            <div class="container">
+                <h2 class="section-title">Garantía INKAFAB</h2>
+                <div class="garantia-content" id="garantiaContent"></div>
+            </div>
+        </section>
+
+        <section id="testimonios" class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Testimonios</h2>
+                <div class="testimonials-grid" id="testimonialsGrid"></div>
+            </div>
+        </section>
+
+        <section id="como-funciona" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">¿Cómo funciona?</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Elige o diseña</h3>
+                        <p>Explora nuestro catálogo o sube tu propio archivo 3D</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Configura</h3>
+                        <p>Selecciona material, color, relleno y cantidad</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Cotiza</h3>
+                        <p>Recibe precio instantáneo y completa tu pedido</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Paga y recibe</h3>
+                        <p>Paga por Yape/Plin y recíbelo por Serpost u Olva</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq">
+            <div class="container">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <div class="faq-list" id="faqList"></div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="cart-sidebar" id="cartSidebar" aria-label="Carrito de compras">
+        <div class="cart-header">
+            <h2>Tu Cotización</h2>
+            <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+<div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <div class="summary-row"><span>Envío</span><span id="shipping">S/. 0.00</span></div>
+                <div class="summary-row total"><span>Total</span><span id="total">S/. 0.00</span></div>
+            </div>
+            <div id="minOrderBlock"></div>
+            <div id="minSuggestions"></div>
+            <form class="checkout-form" id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Nombre completo *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">WhatsApp *</label>
+                    <input type="tel" id="customerPhone" placeholder="9XXXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Método de pago *</label>
+                    <select id="paymentMethod" required>
+                        <option value="yape">Yape</option>
+                        <option value="plin">Plin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryMethod">Método de entrega *</label>
+                    <select id="deliveryMethod" required>
+                        <option value="recogida">Recojo en taller (Juliaca, Puno) — Gratis</option>
+                        <option value="delivery_juliaca">Delivery Juliaca — S/. 15</option>
+                        <option value="serpost">Serpost (provincia)</option>
+                        <option value="olva">Olva (provincia)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="addressGroup" style="display:none;">
+                    <label for="customerAddress">Departamento, ciudad y dirección *</label>
+                    <textarea id="customerAddress" rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="submitOrder">Enviar por WhatsApp</button>
+            </form>
+        </div>
+    </aside>
+    <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+
+    <div class="modal" id="modalSuccess" aria-hidden="true">
+        <div class="modal-content">
+            <h2>Pedido enviado</h2>
+            <p class="modal-message" id="modalSuccessMsg"></p>
+            <button class="btn btn-primary btn-full" onclick="closeModal('modalSuccess')">Aceptar</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8v2-4m-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                        <span>INKAFAB</span>
+                    </div>
+                    <p>Servicios profesionales de impresión 3D. Calidad, precisión y velocidad en todo Perú.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Servicios</h4>
+                        <a href="#catalogo">Catálogo de modelos</a>
+                        <a href="#personalizado">Impresión personalizada</a>
+                        <a href="#materiales">Materiales</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Soporte</h4>
+                        <a href="#faq">Preguntas frecuentes</a>
+                        <a href="#garantia">Garantía</a>
+                        <a href="#testimonios">Testimonios</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <a href="https://wa.me/51959127721" target="_blank">WhatsApp: 959 127 721</a>
+                        <p>Juliaca, Puno - Perú</p>
+                        <!-- <a href="admin.html">Panel Administrador</a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 INKAFAB. Impresión 3D profesional en Perú.</p>
+                <p>Hecho para impresión 3D en Perú</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js?v=006"></script>
+</body>
+</html>

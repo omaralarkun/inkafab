@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INKAFAB - Panel Administrador</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8v-2m-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                <span>INKAFAB · Admin</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">← Volver a la tienda</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <!-- Login -->
+        <section id="loginView" class="admin-card login-card">
+            <h2>Acceso Administrador</h2>
+            <div class="form-group">
+                <label for="adminPass">Contraseña</label>
+                <input type="password" id="adminPass" placeholder="Contraseña de administrador">
+            </div>
+            <button class="btn btn-primary btn-full" id="btnLogin">Ingresar</button>
+            <p class="login-error" id="loginError"></p>
+        </section>
+
+        <!-- Panel -->
+        <section id="panelView" style="display: none;">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="productos">Productos</button>
+                <button class="tab-btn" data-tab="ventas">Ventas</button>
+                <button class="tab-btn" data-tab="materiales">Materiales</button>
+                <button class="tab-btn" data-tab="envio">Envíos</button>
+                <button class="btn btn-secondary" id="btnLogout">Salir</button>
+            </div>
+
+            <!-- PRODUCTOS -->
+            <section id="tab-productos" class="tab-panel">
+                <div class="admin-toolbar">
+                    <button class="btn btn-primary" id="btnNewProduct">+ Nuevo producto</button>
+                    <button class="btn btn-outline" id="btnSaveProductos">💾 Exportar catálogo</button>
+                    <button class="btn btn-outline" id="btnImportProductos">📂 Importar catálogo</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="productosTable">
+                        <thead>
+                            <tr><th>ID</th><th>Nombre</th><th>Tipo</th><th>Material</th><th>Precio</th><th>Stock</th><th>Peso(kg)</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="productosTbody"></tbody>
+                    </table>
+                </div>
+                <div id="productoForm" class="producto-form" style="display:none;"></div>
+            </section>
+
+            <!-- VENTAS -->
+            <section id="tab-ventas" class="tab-panel">
+                <div class="admin-toolbar">
+                    <button class="btn btn-outline" id="btnExportCSV">Exportar CSV</button>
+                    <button class="btn btn-outline" id="btnExportJSON">Exportar JSON</button>
+                    <button class="btn btn-secondary" id="btnRefreshVentas">Actualizar</button>
+                </div>
+                <div class="admin-table-wrap">
+                    <table class="admin-table" id="ventasTable">
+                        <thead>
+                            <tr><th>Nº Pedido</th><th>Fecha</th><th>Cliente</th><th>WhatsApp</th><th>Pago</th><th>Envio</th><th>Total</th><th>Estado</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- MATERIALES -->
+            <section id="tab-materiales" class="tab-panel">
+                <h3>Materiales (JSON)</h3>
+                <textarea id="materialesJson" rows="10" spellcheck="false"></textarea>
+                <div class="admin-toolbar">
+                    <button class="btn btn-primary" id="btnSaveMateriales">💾 Exportar materiales.json</button>
+                    <button class="btn btn-outline" id="btnImportMateriales">📂 Importar materiales.json</button>
+                </div>
+                <p class="admin-note">Edita el JSON y pulsa <b>Exportar materiales.json</b>; después súbelo al hosting para publicar los cambios. La edición está protegida por la contraseña del panel.</p>
+            </section>
+
+            <!-- ENVIO -->
+            <section id="tab-envio" class="tab-panel">
+                <h3>Tarifas de envío (CSV)</h3>
+                <textarea id="envioCsv" rows="12"></textarea>
+                <div class="admin-toolbar">
+                    <button class="btn btn-primary" id="btnSaveEnvio">Guardar tarifas</button>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>© 2026 INKAFAB · Panel Administrador</p>
+        </div>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>
